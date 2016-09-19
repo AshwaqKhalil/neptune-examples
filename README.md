@@ -11,17 +11,17 @@ installed.
 
 ## Python Examples
 
-### Quick Start
+### Getting Started
 The goal of this example is to create a simple parameterizable job
 that generates sine and cosine as functions of time (in seconds),
 with the provided `amplitude` and `sampling_rate`.
-The full description of the example can be found in the 
-<a target="_blank" href="https://neptune/deepsense.io/versions/latest/examples/quick-start.html">documentation</a>.
+The full description of the example can be found in the
+<a target="_blank" href="https://neptune/deepsense.io/versions/latest/getting-started.html">documentation</a>.
 
 #### Run Command
 
     neptune run main.py --config config.yaml --dump-dir-url my_dump_dir
-    
+
 ### Handwritten Digits Recognition
 This example is an adaptation of source code from the deep learning
 <a target="_blank" href="https://keras.io/">Keras</a>
