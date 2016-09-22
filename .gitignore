@@ -93,3 +93,7 @@ ENV/
 # Rope project settings
 .ropeproject
 
+# Example's dump directories
+python/getting-started/my_dump_dir
+python/handwritten-digits-recognition/mnist_cnn_neptune_output/
+python/diabetes-progression-prediction/plot_ols_neptune_output/
