@@ -8,11 +8,11 @@ Linear Regression Example
 This example uses the only the first feature of the `diabetes` dataset, in
 order to illustrate a two-dimensional plot of this regression technique. The
 straight line can be seen in the plot, showing how linear regression attempts
-to draw a straight line that will best minimize the residual sum of squares
+to draw a straight line that will best minimize the mean squared error
 between the observed responses in the dataset, and the responses predicted by
 the linear approximation.
 
-The coefficients, the residual sum of squares and the variance score are also
+The coefficients, the mean squared error and the variance score are also
 calculated.
 
 """
@@ -50,9 +50,9 @@ from PIL import Image
 
 ctx = neptune.Context()
 
-# A channel to send the RSS metric value.
-rss_channel = ctx.job.create_channel(
-    name='RSS',
+# A channel to send the Mean Squared Error metric value.
+mse_channel = ctx.job.create_channel(
+    name='MSE',
     channel_type=neptune.ChannelType.NUMERIC)
 
 # A channel to send the regression chart.
@@ -96,9 +96,9 @@ regr.fit(diabetes_X_train, diabetes_y_train)
 logs_channel.send(x=time.time(), y='Coefficients: ' + str(regr.coef_))
 
 # The mean square error
-rss = np.mean((regr.predict(diabetes_X_test) - diabetes_y_test) ** 2)
-rss_channel.send(x=time.time(), y=rss)
-logs_channel.send(x=time.time(), y="Residual sum of squares: %.2f" % rss)
+mse = np.mean((regr.predict(diabetes_X_test) - diabetes_y_test) ** 2)
+mse_channel.send(x=time.time(), y=mse)
+logs_channel.send(x=time.time(), y="Mean squared error: %.2f" % mse)
 
 # Explained variance score: 1 is perfect prediction
 logs_channel.send(x=time.time(), y='Variance score: %.2f' % regr.score(diabetes_X_test, diabetes_y_test))
