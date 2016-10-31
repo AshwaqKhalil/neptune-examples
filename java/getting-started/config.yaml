@@ -1,0 +1,11 @@
+name: Sine-Cosine Generator
+project: Trigonometry
+parameters:
+  - name: amplitude
+    type: double
+    default: 1.0
+    required: false
+  - name: samplingRate
+    type: double
+    default: 2
+    required: false
