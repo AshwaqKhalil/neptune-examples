@@ -16,7 +16,6 @@
 
 name: Sine-Cosine Generator
 project: Trigonometry
-owner: Your Name
 parameters:
   - name: amplitude
     type: double
