@@ -93,15 +93,15 @@ regr = linear_model.LinearRegression()
 regr.fit(diabetes_X_train, diabetes_y_train)
 
 # The coefficients
-logs_channel.send(x=time.time(), y='Coefficients: ' + str(regr.coef_))
+logs_channel.send(x=1, y='Coefficients: ' + str(regr.coef_))
 
 # The mean square error
 mse = np.mean((regr.predict(diabetes_X_test) - diabetes_y_test) ** 2)
 mse_channel.send(x=time.time(), y=mse)
-logs_channel.send(x=time.time(), y="Mean squared error: %.2f" % mse)
+logs_channel.send(x=2, y="Mean squared error: %.2f" % mse)
 
 # Explained variance score: 1 is perfect prediction
-logs_channel.send(x=time.time(), y='Variance score: %.2f' % regr.score(diabetes_X_test, diabetes_y_test))
+logs_channel.send(x=3, y='Variance score: %.2f' % regr.score(diabetes_X_test, diabetes_y_test))
 
 # Plot outputs
 plt.scatter(diabetes_X_test, diabetes_y_test,  color='black')
