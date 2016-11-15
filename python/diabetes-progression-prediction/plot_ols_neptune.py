@@ -65,8 +65,6 @@ logs_channel = ctx.job.create_channel(
     name='logs',
     channel_type=neptune.ChannelType.TEXT)
 
-ctx.job.finalize_preparation()
-
 # Load the diabetes dataset
 diabetes = datasets.load_diabetes()
 

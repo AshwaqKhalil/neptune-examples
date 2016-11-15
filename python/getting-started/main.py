@@ -30,8 +30,6 @@ logging_channel = ctx.job.create_channel(name='logging', channel_type=neptune.Ch
 
 ctx.job.create_chart(name='sin & cos chart', series={'sin': sin_channel, 'cos': cos_channel})
 
-ctx.job.finalize_preparation()
-
 # The time interval between samples.
 period = 1.0 / sampling_rate
 # The initial timestamp, corresponding to x = 0 in the coordinate axis.

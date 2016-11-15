@@ -130,9 +130,6 @@ ctx.job.create_chart(
 )
 
 
-ctx.job.finalize_preparation()
-
-
 # Format the timestamp in a human-readable format.
 def format_timestamp(timestamp):
     return time.strftime('%H:%M:%S', time.localtime(timestamp))
