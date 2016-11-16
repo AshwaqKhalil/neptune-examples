@@ -171,6 +171,7 @@ class BatchEndCallback(Callback):
 class EpochEndCallback(Callback):
     def __init__(self):
         self.epoch_id = 0
+        self.false_predictions = 0
 
     def on_epoch_end(self, epoch, logs={}):
         self.epoch_id += 1
@@ -188,9 +189,10 @@ class EpochEndCallback(Callback):
         # Identify the incorrectly classified images and send them to Neptune Dashboard.
         for index, (prediction, actual) in enumerate(zip(validation_predictions, y_test)):
             if prediction != actual:
+                self.false_predictions += 1
                 false_prediction_image = false_prediction_neptune_image(
                     raw_X_test[index], index, self.epoch_id, prediction, actual)
-                false_predictions_channel.send(x=time.time(), y=false_prediction_image)
+                false_predictions_channel.send(x=self.false_predictions, y=false_prediction_image)
 
         # Log the end of the epoch.
         timestamp = time.time()
