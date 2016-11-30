@@ -1,0 +1,14 @@
+name: Iris
+description: "Flower Species Prediction"
+project: Iris
+parameters:
+  - name: data_dir
+    description: Directory with input data
+    type: string
+    required: false
+    default: "flower-species-prediction/data/"
+  - name: model_dir
+    description: Directory to save model parameters, graph and etc.
+    type: string
+    required: false
+    default: /tmp/iris_model
