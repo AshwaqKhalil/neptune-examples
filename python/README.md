@@ -67,3 +67,18 @@ The full description of the example can be found in the
 #### Run Command
 
     neptune run flower-species-prediction/main.py --config flower-species-prediction/config.yaml --storage-url /tmp/neptune-iris --paths-to-dump flower-species-prediction
+
+### Leaderboard
+This example is an adaptation of
+<a target="_blank" href="https://www.tensorflow.org/tutorials/deep_cnn/">Convolutional Neural Networks</a>
+from the <a target="_blank" href="https://www.tensorflow.org/">TensorFlow</a>
+library, which shows the ease of adding Neptune features to the code.
+The example consists of Python files using TensorFlow to train and evaluate a convolutional neural network that predicts image categories (CIFAR-10). Then, the evaluated metrics are sent to Neptune to build the leaderboard.
+
+#### Additional Requirements
+
+* <a target="_blank" href="https://www.tensorflow.org/versions/r0.11/get_started/os_setup#download-and-setup">TensorFlow 0.11.0</a>
+
+#### Run Command
+
+    neptune run leaderboard/main.py --config leaderboard/config.yaml --dump-dir-url leaderboard/dump --paths-to-dump leaderboard
