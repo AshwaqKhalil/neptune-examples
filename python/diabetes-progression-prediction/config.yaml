@@ -20,6 +20,9 @@ project: Diabetes
 parameters:
   - name: feature_index
     type: int
-    description: The index of the feature used to train the linear regression model. It should be between 0 and 9.
     required: true
-    default: 2
+    description: The index of the feature used to train the linear regression model. It should be between 0 and 9.
+metric:
+    name: Mean squared error
+    channel: MSE
+    direction: minimize

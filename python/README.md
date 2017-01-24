@@ -35,7 +35,7 @@ Full description of the example can be found in the
 This example is an adaptation of
 <a target="_blank" href="http://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html">Linear Regression example</a>
 from the <a target="_blank" href="http://scikit-learn.org/stable/">scikit-learn</a>
-machine learning library which shows utilization of Neptune features.
+machine learning library which shows utilization of [Grid Search](https://neptune.deepsense.io/versions/latest/reference-guides/job-and-experiment.html#experiments).
 The example consists of a single Python file using scikit-learn to train and evaluate a simple linear regression model
 that predicts disease progression of diabetes patients.
 The full description of the example can be found in the
