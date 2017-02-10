@@ -40,11 +40,11 @@ while (TRUE) {
   sinY <- amplitude * sin(x)
   cosY <- amplitude * cos(x)
 
-  send("sin", x, sinY)
-  send("cos", x, cosY)
+  channelSend("sin", x, sinY)
+  channelSend("cos", x, cosY)
 
   loggingEntry <- paste("sin(", x, ")=", sinY, "; cos(", x, ")=", cosY)
-  send("logging", iteration, loggingEntry)
+  channelSend("logging", iteration, loggingEntry)
 
   Sys.sleep(period)
 }
