@@ -30,7 +30,7 @@ public class GettingStarted {
         NeptuneContext context = NeptuneContextFactory.createContext(args);
 
         double amplitude = context.getParams().get("amplitude").getValue().asDouble().get();
-        double samplingRate = context.getParams().get("samplingRate").getValue().asDouble().get();
+        double samplingRate = context.getParams().get("sampling_rate").getValue().asDouble().get();
 
         Channel<Double> sinChannel = context.getJob().createNumericChannel("sin");
         Channel<Double> cosChannel = context.getJob().createNumericChannel("cos");
