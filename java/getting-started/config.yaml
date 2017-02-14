@@ -21,7 +21,7 @@ parameters:
     type: double
     default: 1.0
     required: false
-  - name: samplingRate
+  - name: sampling_rate
     type: double
     default: 2
     required: false
