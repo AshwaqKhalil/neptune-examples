@@ -10,7 +10,7 @@ The full description of the example can be found in the
 ### Run Command
 
     cd getting-started
-    neptune run main.py --config config.yaml --dump-dir-url my_dump_dir
+    neptune run
 
 ## Examples
 
@@ -29,7 +29,7 @@ Full description of the example can be found in the
 
 #### Run Command
 
-    neptune run mnist_cnn_neptune.py --config config.yaml --dump-dir-url mnist_cnn_neptune_output -- --kernel_size 5
+    neptune run mnist_cnn_neptune.py -- --kernel_size 5
 
 ### Diabetes Progression Prediction
 This example is an adaptation of
@@ -48,7 +48,7 @@ The full description of the example can be found in the
 
 #### Run Command
 
-    neptune run plot_ols_neptune.py --config config.yaml --dump-dir-url plot_ols_neptune_output -- --feature_index 2
+    neptune run plot_ols_neptune.py -- --feature_index 2
 
 ### Flower Species Prediction
 This example is an adaptation of
@@ -66,7 +66,7 @@ The full description of the example can be found in the
 
 #### Run Command
 
-    neptune run flower-species-prediction/main.py --config flower-species-prediction/config.yaml --storage-url /tmp/neptune-iris --paths-to-dump flower-species-prediction
+    neptune run
 
 ### Leaderboard
 This example is an adaptation of
@@ -81,4 +81,4 @@ The example consists of Python files using TensorFlow to train and evaluate a co
 
 #### Run Command
 
-    neptune run leaderboard/main.py --config leaderboard/config.yaml --dump-dir-url leaderboard/dump --paths-to-dump leaderboard
+    neptune run

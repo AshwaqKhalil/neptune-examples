@@ -16,4 +16,4 @@ The full description of the example can be found in the
 
 ### Run Command
 
-    neptune run getting-started.jar --config config.yaml --dump-dir-url output
+    neptune run getting-started.jar
