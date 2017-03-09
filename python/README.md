@@ -78,9 +78,9 @@ The example consists of Python files using TensorFlow to train and evaluate a co
 #### Additional Requirements
 
 * <a target="_blank" href="https://www.tensorflow.org/install/">TensorFlow 1.0.1</a>
-* Tensorflow models repository in `PYTHONPATH`
+* TensorFlow models repository in `PYTHONPATH`
 
-You should setup the Tensorflow models repository with the following commands:
+You should setup the TensorFlow models repository with the following commands:
 
     git clone https://github.com/tensorflow/models/
     export PYTHONPATH="$PWD/models/tutorials/image/cifar10:$PYTHONPATH"
@@ -88,3 +88,32 @@ You should setup the Tensorflow models repository with the following commands:
 #### Run Command
 
     neptune run leaderboard/main.py --config leaderboard/config.yaml --dump-dir-url leaderboard/dump --paths-to-dump leaderboard
+
+### RoI pooling
+This example presents RoI pooling in <a target="_blank" href="https://www.tensorflow.org/">TensorFlow</a> based on our <a target="_blank" href="https://github.com/deepsense-io/roi-pooling">custom RoI pooling TensorFlow operation</a>.
+The network with the <a target="_blank" href="https://arxiv.org/pdf/1504.08083.pdf">Fast R-CNN</a> architecture detects cars on images.
+
+#### Additional Requirements
+
+* <a target="_blank" href="https://developer.nvidia.com/cuda-downloads">CUDA 8</a>
+* <a target="_blank" href="https://www.tensorflow.org/">TensorFlow 1.0</a> with GPU support
+* our <a target="_blank" href="https://github.com/deepsense-io/roi-pooling">custom RoI pooling TensorFlow operation</a>
+* <a target="_blank" href="http://opencv.org/">OpenCV</a>
+
+You should setup the custom RoI pooling TensorFlow operation with the following commands:
+
+    git clone https://github.com/deepsense-io/roi-pooling
+    python setup.py install
+
+You also should download the file `vgg16-20160129.tfmodel` referred to by the torrent file `vgg16-20160129.tfmodel.torrent`
+and save it in the `data` directory.
+
+#### Run command
+
+    neptune run code/main.py
+    --config code/cfg.yaml
+    --paths-to-dump code
+    --dump-dir-url dump
+    --im_folder $PWD/data/images
+    --roidb $PWD/data/roidb
+    --pretrained_path $PWD/data/vgg16-20160129.tfmodel
