@@ -77,7 +77,13 @@ The example consists of Python files using TensorFlow to train and evaluate a co
 
 #### Additional Requirements
 
-* <a target="_blank" href="https://www.tensorflow.org/versions/r0.11/get_started/os_setup#download-and-setup">TensorFlow 0.11.0</a>
+* <a target="_blank" href="https://www.tensorflow.org/install/">TensorFlow 1.0.1</a>
+* Tensorflow models repository in `PYTHONPATH`
+
+You should setup the Tensorflow models repository with the following commands:
+
+    git clone https://github.com/tensorflow/models/
+    export PYTHONPATH="$PWD/models/tutorials/image/cifar10:$PYTHONPATH"
 
 #### Run Command
 
