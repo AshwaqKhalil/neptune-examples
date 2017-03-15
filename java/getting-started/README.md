@@ -14,4 +14,4 @@
 
 4. Run the job.
 
-    `neptune run getting-started.jar`
+    `neptune run --executable getting-started.jar`
