@@ -29,6 +29,7 @@ Full description of the example can be found in the
 
 #### Run Command
 
+    cd handwritten-digits-recognition
     neptune run mnist_cnn_neptune.py -- --kernel_size 5
 
 ### Diabetes Progression Prediction
@@ -48,6 +49,7 @@ The full description of the example can be found in the
 
 #### Run Command
 
+    cd diabetes-progression-prediction
     neptune run plot_ols_neptune.py -- --feature_index 2
 
 ### Flower Species Prediction
@@ -66,6 +68,7 @@ The full description of the example can be found in the
 
 #### Run Command
 
+    cd flower-species-prediction
     neptune run
 
 ### Leaderboard
@@ -77,8 +80,45 @@ The example consists of Python files using TensorFlow to train and evaluate a co
 
 #### Additional Requirements
 
-* <a target="_blank" href="https://www.tensorflow.org/versions/r0.11/get_started/os_setup#download-and-setup">TensorFlow 0.11.0</a>
+* <a target="_blank" href="https://www.tensorflow.org/install/">TensorFlow 1.0.1</a>
+* TensorFlow models repository in `PYTHONPATH`
+
+You should setup the TensorFlow models repository with the following commands:
+
+    git clone https://github.com/tensorflow/models/
+    export PYTHONPATH="$PWD/models/tutorials/image/cifar10:$PYTHONPATH"
 
 #### Run Command
 
+    cd leaderboard
     neptune run
+
+### RoI pooling
+This example presents RoI pooling in <a target="_blank" href="https://www.tensorflow.org/">TensorFlow</a> based on our <a target="_blank" href="https://github.com/deepsense-io/roi-pooling">custom RoI pooling TensorFlow operation</a>.
+The network with the <a target="_blank" href="https://arxiv.org/pdf/1504.08083.pdf">Fast R-CNN</a> architecture detects cars on images.
+
+#### Additional Requirements
+
+* <a target="_blank" href="https://developer.nvidia.com/cuda-downloads">CUDA 8</a>
+* <a target="_blank" href="https://www.tensorflow.org/">TensorFlow 1.0</a> with GPU support
+* our <a target="_blank" href="https://github.com/deepsense-io/roi-pooling">custom RoI pooling TensorFlow operation</a>
+* <a target="_blank" href="http://opencv.org/">OpenCV</a>
+
+You should setup the custom RoI pooling TensorFlow operation with the following commands:
+
+    git clone https://github.com/deepsense-io/roi-pooling
+    python setup.py install
+
+You also should download the file `vgg16-20160129.tfmodel` referred to by the torrent file `vgg16-20160129.tfmodel.torrent`
+and save it in the `data` directory.
+
+#### Run command
+    cd roi-pooling
+    export DATA_DIR=`pwd`/data
+    cd code
+    neptune run \
+    -- \
+    --im_folder $DATA_DIR/images \
+    --roidb $DATA_DIR/roidb \
+    --pretrained_path $DATA_DIR/vgg16-20160129.tfmodel
+
