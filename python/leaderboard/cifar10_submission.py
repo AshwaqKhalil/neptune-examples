@@ -23,7 +23,7 @@ import math
 import numpy as np
 import tensorflow as tf
 
-from tensorflow.models.image.cifar10 import cifar10
+import cifar10
 
 FLAGS = tf.app.flags.FLAGS
 

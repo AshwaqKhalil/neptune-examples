@@ -16,7 +16,7 @@
 
 import tensorflow as tf
 
-from tensorflow.models.image.cifar10 import cifar10_train
+import cifar10_train
 
 import cifar10_submission
 import evaluation
