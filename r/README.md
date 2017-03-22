@@ -10,4 +10,4 @@ The full description of the example can be found in the
 ### Run Command
 
     cd getting-started
-    neptune run main.R --config config.yaml --dump-dir-url my_dump_dir
+    neptune run

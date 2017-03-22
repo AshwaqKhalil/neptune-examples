@@ -14,4 +14,4 @@
 
 4. Run the job.
 
-    `neptune run getting-started.jar --config config.yaml --dump-dir-url output`
+    `neptune run --executable getting-started.jar`

@@ -22,7 +22,7 @@ parameters:
     description: Directory with input data
     type: string
     required: false
-    default: flower-species-prediction/data/
+    default: data/
   - name: model_dir
     description: Directory to save model parameters, graph and etc.
     type: string

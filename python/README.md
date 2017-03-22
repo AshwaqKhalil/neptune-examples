@@ -10,7 +10,7 @@ The full description of the example can be found in the
 ### Run Command
 
     cd getting-started
-    neptune run main.py --config config.yaml --dump-dir-url my_dump_dir
+    neptune run
 
 ## Examples
 
@@ -29,7 +29,8 @@ Full description of the example can be found in the
 
 #### Run Command
 
-    neptune run mnist_cnn_neptune.py --config config.yaml --dump-dir-url mnist_cnn_neptune_output -- --kernel_size 5
+    cd handwritten-digits-recognition
+    neptune run mnist_cnn_neptune.py -- --kernel_size 5
 
 ### Diabetes Progression Prediction
 This example is an adaptation of
@@ -48,7 +49,8 @@ The full description of the example can be found in the
 
 #### Run Command
 
-    neptune run plot_ols_neptune.py --config config.yaml --dump-dir-url plot_ols_neptune_output -- --feature_index 2
+    cd diabetes-progression-prediction
+    neptune run plot_ols_neptune.py -- --feature_index 2
 
 ### Flower Species Prediction
 This example is an adaptation of
@@ -66,7 +68,8 @@ The full description of the example can be found in the
 
 #### Run Command
 
-    neptune run flower-species-prediction/main.py --config flower-species-prediction/config.yaml --storage-url /tmp/neptune-iris --paths-to-dump flower-species-prediction
+    cd flower-species-prediction
+    neptune run
 
 ### Leaderboard
 This example is an adaptation of
@@ -87,7 +90,8 @@ You should setup the TensorFlow models repository with the following commands:
 
 #### Run Command
 
-    neptune run leaderboard/main.py --config leaderboard/config.yaml --dump-dir-url leaderboard/dump --paths-to-dump leaderboard
+    cd leaderboard
+    neptune run
 
 ### RoI pooling
 This example presents RoI pooling in <a target="_blank" href="https://www.tensorflow.org/">TensorFlow</a> based on our <a target="_blank" href="https://github.com/deepsense-io/roi-pooling">custom RoI pooling TensorFlow operation</a>.
@@ -109,11 +113,12 @@ You also should download the file `vgg16-20160129.tfmodel` referred to by the to
 and save it in the `data` directory.
 
 #### Run command
+    cd roi-pooling
+    export DATA_DIR=`pwd`/data
+    cd code
+    neptune run \
+    -- \
+    --im_folder $DATA_DIR/images \
+    --roidb $DATA_DIR/roidb \
+    --pretrained_path $DATA_DIR/vgg16-20160129.tfmodel
 
-    neptune run code/main.py
-    --config code/cfg.yaml
-    --paths-to-dump code
-    --dump-dir-url dump
-    --im_folder $PWD/data/images
-    --roidb $PWD/data/roidb
-    --pretrained_path $PWD/data/vgg16-20160129.tfmodel
