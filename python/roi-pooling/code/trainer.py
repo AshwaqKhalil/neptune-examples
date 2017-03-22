@@ -113,7 +113,7 @@ class Trainer(object):
 
     # by Ross Girshick
 
-    def nms(self, dets, thresh):
+    def non_maximum_supression(self, dets, thresh):
         x1 = dets[:, 0]
         y1 = dets[:, 1]
         x2 = dets[:, 2]
@@ -211,7 +211,7 @@ class Trainer(object):
                         scores = np.reshape(logits, (-1, 1))
                         boxes = np.hstack([boxes, scores])
                         boxes = self.get_top_k(boxes, logits, 20)
-                        keep = self.nms(boxes, .3)
+                        keep = self.non_maximum_supression(boxes, .3)
                         boxes = boxes[keep, :4]
                         roi_pool = rois[:, 1:]*np.asarray([16, 16, 16, 16])
                         self.handler.send_image_with_proposals(k, im[:, :, [2, 1, 0]], boxes, im.shape)
