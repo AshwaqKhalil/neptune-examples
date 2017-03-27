@@ -19,11 +19,11 @@ package io.deepsense.neptune.gettingstarted;
 
 import io.deepsense.neptune.clientlibrary.NeptuneContextFactory;
 import io.deepsense.neptune.clientlibrary.models.Channel;
-import io.deepsense.neptune.clientlibrary.models.ChartSeriesCollection;
+import io.deepsense.neptune.clientlibrary.models.ChartSeries;
 import io.deepsense.neptune.clientlibrary.models.NeptuneContext;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class GettingStarted {
     public static void main(String[] args) throws InterruptedException {
@@ -37,11 +37,11 @@ public class GettingStarted {
 
         Channel<String> loggingChannel = context.getJob().createTextChannel("logging");
 
-        ChartSeriesCollection series = context.getJob().createChartSeriesCollection();
-        series.add("sin", sinChannel);
-        series.add("cos", cosChannel);
+        Collection<ChartSeries> seriesCollection = new ArrayList<>();
+        seriesCollection.add(new ChartSeries("sin", sinChannel));
+        seriesCollection.add(new ChartSeries("cos", cosChannel));
 
-        context.getJob().createChart("sin & cos chart", series);
+        context.getJob().createChart("sin & cos chart", seriesCollection);
 
         long period = (long) (1000.0 / samplingRate);
 
