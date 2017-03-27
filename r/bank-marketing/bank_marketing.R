@@ -26,14 +26,6 @@ customer_data$duration <- NULL
 y <- customer_data$y == 'yes'
 x <- model.matrix(y~.-1, data = customer_data)
 
-# Setup channels and plots
-createNumericChannel('train_auc')
-createNumericChannel('valid_auc')
-createNumericChannel('test_auc')
-createChart(chartName = 'Train & validation auc', series = list('train_auc', 'valid_auc'))
-createNumericChannel('execution_time')
-createChart(chartName = 'Total execution time', series = list('execution_time'))
-
 # Train, validation and test sets
 set.seed(999)
 train_valid_test <- sample(1:3, prob = c(0.6, 0.2, 0.2), replace = T, size = nrow(x))
@@ -48,12 +40,20 @@ x_train <- x[train_idx,]
 x_valid <- x[valid_idx,]
 x_test <- x[test_idx,]
 
+# Setup channels and plots
+createNumericChannel('train_auc')
+createNumericChannel('valid_auc')
+createNumericChannel('test_auc')
+createChart(chartName = 'Train & validation auc', series = list('train_auc', 'valid_auc'))
+createNumericChannel('execution_time')
+createChart(chartName = 'Total execution time', series = list('execution_time'))
+
 cb.print.evaluation <- function (period = 1)  {
   callback <- function(env = parent.frame()) {
     if (length(env$bst_evaluation) == 0 || period == 0)
       return()
     i <- env$iteration
-    if ((i - 1)%%period == 0 || i == env$begin_iteration || 
+    if ((i - 1)%%period == 0 || i == env$begin_iteration ||
         i == env$end_iteration) {
       channelSend('train_auc', i, env$bst_evaluation[1])
       channelSend('valid_auc', i, env$bst_evaluation[2])
@@ -93,9 +93,10 @@ lift_chart <- function(responses, predictions) {
   createChart(chartName = 'Lift chart', series = list('lift'))
   n <- length(lift)
   for(x in seq(0.1, 1, by = 0.1)) {
-    # max(., 1) assures a proper index >= 1    
-    channelSend('lift', x, lift[max(round(x * n), 1)]) 
+    # max(., 1) assures a proper index >= 1
+    channelSend('lift', x, lift[max(round(x * n), 1)])
   }
 }
 
 lift_chart(y_test, predictions_test)
+
