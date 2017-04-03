@@ -32,4 +32,4 @@ R libraries:
 ### Run Command
 
     cd bank-marketing
-    neptune run bank_marketing.R --config config.yaml --dump-dir-url my_dump_dir
+    neptune run bank_marketing.R
