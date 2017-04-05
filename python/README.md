@@ -50,7 +50,7 @@ The full description of the example can be found in the
 #### Run Command
 
     cd diabetes-progression-prediction
-    neptune run plot_ols_neptune.py -- --feature_index 2
+    neptune run plot_ols_neptune.py -- --feature_index "(0, 9, 1)"
 
 ### Flower Species Prediction
 This example is an adaptation of
