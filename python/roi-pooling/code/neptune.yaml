@@ -3,11 +3,11 @@ description: RoI pooling in TensorFlow - example
 project: RoI
 parameters:
   - name: roidb
-    description: path to roidb folder
+    description: absolute path to roidb folder
     type: string
     required: true
   - name: im_folder
-    description: path to image folder
+    description: absolute path to image folder
     type: string
     required: true
   - name: pretrained_path
@@ -24,6 +24,3 @@ parameters:
     type: double
     default: 1e-04
     required: false
-
-
-

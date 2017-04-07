@@ -15,9 +15,6 @@ class Trainer(object):
                                                    ('total loss', 'total loss')],
                                       im_channel_names=['region proposals for RoI pooling', 'network detections'])
         self.send_im = False
-        num1 = len(os.listdir(self.handler.im_folder))
-        num2 = len(os.listdir(self.handler.im_folder))
-        assert num1 == num2
         im_paths = self.get_im_paths()
         roi_paths = self.get_roi_paths()
         pretrained_path = self.handler.pretrained_path
