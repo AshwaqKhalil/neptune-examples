@@ -107,10 +107,20 @@ The network with the <a target="_blank" href="https://arxiv.org/pdf/1504.08083.p
 You should setup the custom RoI pooling TensorFlow operation with the following commands:
 
     git clone https://github.com/deepsense-io/roi-pooling
-    python setup.py install
+    cd roi-pooling
+    sudo python setup.py install
 
 You also should download the file `vgg16-20160129.tfmodel` referred to by the torrent file `vgg16-20160129.tfmodel.torrent`
 and save it in the `data` directory.
+
+Finally, you also need to download training set.
+Simply run these commands:
+
+    cd roi-pooling/code
+    python get_data.py
+
+This can take a few minutes, because the Pascal VOC 2007 dataset needs to be downloaded.
+Once the script is completed, you will have the training data in `roi-pooling/data` directory.
 
 #### Run command
     cd roi-pooling

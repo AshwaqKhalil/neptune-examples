@@ -56,10 +56,10 @@ def main():
     with tarfile.open("VOCtest.tar") as tar:
         tar.extractall("../VOCdata")
     print("Selecting car images")
-    extract_images("../VOCdata/VOCdevkit/VOC2007", "../VOCdata")
+    extract_images("../VOCdata/VOCdevkit/VOC2007", "../data")
     print("Removing downloaded data")
     os.remove("VOCtest.tar")
-    shutil.rmtree("../VOCdata/VOCdevkit")
+    shutil.rmtree("../VOCdata")
 
 if __name__ == '__main__':
     main()
