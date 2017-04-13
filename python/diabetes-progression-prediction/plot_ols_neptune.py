@@ -16,6 +16,10 @@ The coefficients, the mean squared error and the variance score are also
 calculated.
 
 """
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from builtins import str
 print(__doc__)
 
 

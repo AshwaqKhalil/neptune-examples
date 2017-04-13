@@ -1,7 +1,14 @@
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
+from builtins import zip
+from builtins import str
 import numpy as np
 import os
 import xml.etree.ElementTree as ET
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import tarfile
 import shutil
 from glob import glob
@@ -30,7 +37,7 @@ def extract_images(pascal_dir, output_dir):
     img_dir = os.path.join(output_dir, 'images')
     roidb_dir = os.path.join(output_dir, 'roidb')
     if os.path.isdir(img_dir) or os.path.isdir(roidb_dir):
-        print 'output directories already exist, stopping'
+        print('output directories already exist, stopping')
         return
     os.makedirs(img_dir)
     os.makedirs(roidb_dir)
@@ -51,7 +58,7 @@ def extract_images(pascal_dir, output_dir):
 
 def main():
     print("Downloading VOC dataset")
-    urllib.urlretrieve(PASCAL_VOC_URL, "VOCtest.tar")
+    urllib.request.urlretrieve(PASCAL_VOC_URL, "VOCtest.tar")
     print("Extracting VOC dataset")
     with tarfile.open("VOCtest.tar") as tar:
         tar.extractall("../VOCdata")

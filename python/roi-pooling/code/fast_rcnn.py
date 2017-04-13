@@ -1,8 +1,12 @@
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from builtins import object
 import tensorflow as tf
 from roi_pooling.roi_pooling_ops import roi_pooling
 
 
-class FastRCNN:
+class FastRCNN(object):
 
     def __init__(self, path):
 
