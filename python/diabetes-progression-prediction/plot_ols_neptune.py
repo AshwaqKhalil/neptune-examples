@@ -41,8 +41,11 @@ print(__doc__)
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
 #
-
-import matplotlib.pyplot as plt
+import matplotlib
+# Agg is used to generate images without having a window appear
+# The order of matplotlib imports have to be like this
+# Reason: https://matplotlib.org/faq/howto_faq.html#generate-images-without-having-a-window-appear
+matplotlib.use('Agg')
 import numpy as np
 from sklearn import datasets, linear_model
 
@@ -51,6 +54,7 @@ import io
 import time
 from deepsense import neptune
 from PIL import Image
+from matplotlib import pyplot as plt
 
 ctx = neptune.Context()
 
