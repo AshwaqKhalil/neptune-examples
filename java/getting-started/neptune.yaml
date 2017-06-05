@@ -15,7 +15,7 @@
 #
 
 name: Sine-Cosine Generator
-project: Trigonometry
+project-key: SAN
 parameters:
   - name: amplitude
     type: double

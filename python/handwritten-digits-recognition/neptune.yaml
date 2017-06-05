@@ -16,7 +16,7 @@
 
 name: Handwritten Digits Recognition
 description: A convolutional neural network recognizing handwritten digits.
-project: MNIST
+project-key: SAN
 parameters:
   - name: kernel_size
     description: The convolution kernel size.

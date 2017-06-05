@@ -16,7 +16,7 @@
 
 name: Iris
 description: Flower Species Prediction
-project: Iris
+project-key: SAN
 parameters:
   - name: data_dir
     description: Directory with input data

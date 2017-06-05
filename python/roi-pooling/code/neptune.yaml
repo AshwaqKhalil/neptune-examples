@@ -1,6 +1,6 @@
 name: RoI pooling
 description: RoI pooling in TensorFlow - example
-project: RoI
+project-key: SAN
 parameters:
   - name: roidb
     description: absolute path to roidb folder

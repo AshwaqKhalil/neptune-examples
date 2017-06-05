@@ -16,7 +16,7 @@
 
 name: Diabetes Progression Prediction
 description: Linear Regression with scikit-learn on diabetes dataset.
-project: Diabetes
+project-key: SAN
 parameters:
   - name: feature_index
     type: int

@@ -15,7 +15,7 @@
 #
 
 name: Bank Marketing
-project: Predicting Deposit Subscription
+project-key: SAN
 parameters:
   - name: nrounds
     type: int
