@@ -1,18 +1,6 @@
 from time import sleep
-from deepsense import neptune
-
-ctx = neptune.Context()
-# I really recommend adding functions like that,
-# which will greately reduce amount of code (and visual noise)
-# ideally:
-# neptune.numeric_channel
-# WITHOUT the need of
-# ctx = neptune.Context()
-def numeric_channel(name, plot=True):
-    channel = ctx.job.create_channel(name=name, channel_type=neptune.ChannelType.NUMERIC)
-    if plot:
-        ctx.job.create_chart(name='{} chart'.format(name), series={name: channel})
-    return channel
+# from deepsense import neptune
+import neptuner
 
 # function y = f(x)
 def f(x):
@@ -27,8 +15,8 @@ x = 0.         # initial x
 lr = 0.1       # learning rate
 n_steps = 30   # number of iterations
 
-channel_x = numeric_channel('x')
-channel_y = numeric_channel('y')
+channel_x = neptuner.numeric_channel('x')
+channel_y = neptuner.numeric_channel('y')
 
 # searching for minimum with gradient descent
 for step in range(n_steps):
