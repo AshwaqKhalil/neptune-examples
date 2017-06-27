@@ -2,11 +2,11 @@ from time import sleep
 
 # function y = f(x)
 def f(x):
-    return (x - 42)**2 + 137
+    return (x - 6)**2 + 9
 
 # symbolic gradient
 def df(x):
-    return 2 * (x - 42)
+    return 2 * (x - 6)
 
 # parameters
 x = 0.         # initial x
@@ -22,4 +22,4 @@ for step in range(n_steps):
     print("y: {}".format(f(x)))
 
     # a crucial part of SleepyGradientDescent
-    sleep(0.5)
+    sleep(1)
