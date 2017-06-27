@@ -3,3 +3,8 @@
 
 # data
 *.mat
+
+# Python trash
+
+*.pyc
+__pycache__/
