@@ -1,0 +1,44 @@
+executable: main.py
+name: neural style on VGG
+project: Style transfer
+docker-image: ml-docker-repo.deepsense.codilime.com/tensorflow_extras:1.6.3-cuda80-tf1_0-krs203-tp018
+requirements: [pascal]
+storage: /mnt/ml-team/homes/patryk.miziula/neural-style
+exclude:
+    - meur/
+    - contents/
+    - styles/
+    - vgg16_for_neural-style.ckpt
+parameters:
+  - name: path_to_model
+    type: string
+    default: '/mnt/ml-team/homes/patryk.miziula/neural-style/data/vgg16_for_neural-style.ckpt'
+    required: false
+  - name: path_to_content
+    type: string
+    default: '/mnt/ml-team/homes/patryk.miziula/neural-style/data/contents/Neckarfront_Tuebingen.jpg'
+    required: false
+  - name: path_to_style
+    type: string
+    default: '/mnt/ml-team/homes/patryk.miziula/neural-style/data/styles/starry_night.jpg'
+    required: false
+  - name: learning_rate
+    type: double
+    default: 5.
+    required: false
+  - name: alpha
+    type: double
+    default: 3e-4
+    required: false
+  - name: beta
+    type: double
+    default: 1.
+    required: false
+  - name: max_axis_size
+    type: int
+    default: 500
+    required: false
+  - name: number_of_iterations
+    type: int
+    default: 2500
+    required: false
