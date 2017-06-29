@@ -5,40 +5,57 @@ docker-image: ml-docker-repo.deepsense.codilime.com/tensorflow_extras:1.6.3-cuda
 requirements: [pascal]
 storage: /mnt/ml-team/homes/patryk.miziula/neural-style
 exclude:
-    - meur/
     - contents/
     - styles/
     - vgg16_for_neural-style.ckpt
 parameters:
   - name: path_to_model
+    description: path to weights of the pretrained model
     type: string
     default: '/mnt/ml-team/homes/patryk.miziula/neural-style/data/vgg16_for_neural-style.ckpt'
     required: false
-  - name: path_to_content
+  - name: path_to_images
+    description: path to the directory with images
     type: string
-    default: '/mnt/ml-team/homes/patryk.miziula/neural-style/data/contents/Neckarfront_Tuebingen.jpg'
+    default: '/mnt/ml-team/homes/patryk.miziula/neural-style/data/images/'
     required: false
-  - name: path_to_style
+  - name: content_image_name
+    description: name of the content image
     type: string
-    default: '/mnt/ml-team/homes/patryk.miziula/neural-style/data/styles/starry_night.jpg'
+    default: 'cat.jpg'
+    required: false
+  - name: style_image_name
+    description: name of the style image
+    type: string
+    default: 'picasso.jpg'
+    required: false
+  - name: from_content
+    description: style transfer starts from the content image or from a random image
+    type: boolean
+    default: true
     required: false
   - name: learning_rate
+    description: learning rate
     type: double
     default: 5.
     required: false
-  - name: alpha
-    type: double
-    default: 3e-4
-    required: false
-  - name: beta
+  - name: style_intensity
+    description: default style intensity
     type: double
     default: 1.
     required: false
-  - name: max_axis_size
+  - name: content_intensity
+    description: default content intensity
+    type: double
+    default: 1.
+    required: false
+  - name: max_img_size
+    description: maximal allowed height and width of the image
     type: int
     default: 500
     required: false
   - name: number_of_iterations
+    description: number of iterations
     type: int
     default: 2500
     required: false
