@@ -19,12 +19,12 @@ parameters:
     type: string
     default: '/mnt/ml-team/homes/patryk.miziula/neural-style/data/images/'
     required: false
-  - name: content_image_name
+  - name: content
     description: name of the content image
     type: string
     default: 'cat.jpg'
     required: false
-  - name: style_image_name
+  - name: style
     description: name of the style image
     type: string
     default: 'picasso.jpg'

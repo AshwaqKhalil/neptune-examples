@@ -190,8 +190,8 @@ def transfer_style(stats, img):
 
 
 def main():
-    content, style = read_images(neptuner.params.path_to_images + neptuner.params.content_image_name,
-                                 neptuner.params.path_to_images + neptuner.params.style_image_name,
+    content, style = read_images(neptuner.params.path_to_images + neptuner.params.content,
+                                 neptuner.params.path_to_images + neptuner.params.style,
                                  neptuner.params.max_img_size)
     stats = get_stats(content, style)
     transfer_style(stats, content)
