@@ -5,7 +5,7 @@ import cv2
 # from deepsense import neptune
 import neptuner
 
-
+# Definitions of channels.
 channel_loss = neptuner.numeric_channel('loss')
 channel_loss_style = neptuner.numeric_channel('loss_style')
 channel_loss_content = neptuner.numeric_channel('loss_content')
@@ -13,6 +13,7 @@ channel_balance = neptuner.numeric_channel('content/style balance')
 
 channel_image = neptuner.image_channel('channel_image')
 
+# Definition of an action.
 content_style_balance = 1.0
 def _change_content_style_balance_handler(csb):
     global content_style_balance
@@ -23,6 +24,7 @@ neptuner.register_action(name='Change content/style balance', handler=_change_co
 # neptuner.register_action_change_value('Change content/style balance', content_style_balance)
 
 
+# Reads images and scales them to the allowed size.
 def read_images(path_to_content, path_to_style, max_axis_size):
     content = cv2.imread(path_to_content).astype(np.float32)
     style = cv2.imread(path_to_style).astype(np.float32)
@@ -37,6 +39,7 @@ def read_images(path_to_content, path_to_style, max_axis_size):
     return content, style
 
 
+# Retrieves image to the printable form.
 def retrieve(img):
     img = np.squeeze(img, axis=(0,))
     img += [103.939, 116.779, 123.68]
@@ -44,6 +47,7 @@ def retrieve(img):
     return img
 
 
+# Definition of the convolutional layer.
 def conv2d(signal, num_outputs, kernel_size=[3, 3], stride=1, padding='SAME', activation_fn=tf.nn.relu, scope='Conv'):
     num_inputs = int(signal.get_shape()[-1])
     wshape = [kernel_size[0], kernel_size[1], num_inputs, num_outputs]
@@ -57,12 +61,14 @@ def conv2d(signal, num_outputs, kernel_size=[3, 3], stride=1, padding='SAME', ac
     return signal
 
 
+# Definition of the average-pool layer.
 def avg_pool(signal, kernel_size=[2, 2], stride=2, padding='SAME', name='AvgPool'):
     signal = tf.nn.avg_pool(signal, ksize=[1, kernel_size[0], kernel_size[1], 1],
                             strides=[1, stride, stride, 1], padding=padding, name=name)
     return signal
 
 
+# Definition of the Gram matrix
 def gram_matrix(signal):
     _, h, w, d = map(int, signal.get_shape())
     V = tf.reshape(signal, shape=(h*w, d))
@@ -71,6 +77,9 @@ def gram_matrix(signal):
     return G
 
 
+# Gets activation of the conv4_2 layer of the VGG16 network for the content image
+# and Gram matrices of conv1_1, ..., conv5_1 for the style image.
+# They are used as reference points to define content and style loss functions.
 def get_stats(content, style):
     tf.reset_default_graph()
 
@@ -118,6 +127,9 @@ def get_stats(content, style):
     return stats
 
 
+# Finetunes the VGG16 network to have an activation on conv4_2 layer close to that for the content image
+# and Gram matrices close to those for the style image.
+# Also, sends current loss values and image thumbnail to Neptune.
 def transfer_style(stats, img):
     tf.reset_default_graph()
 
