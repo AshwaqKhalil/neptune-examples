@@ -68,7 +68,7 @@ def avg_pool(signal, kernel_size=[2, 2], stride=2, padding='SAME', name='AvgPool
     return signal
 
 
-# Definition of the Gram matrix
+# Definition of the Gram matrix.
 def gram_matrix(signal):
     _, h, w, d = map(int, signal.get_shape())
     V = tf.reshape(signal, shape=(h*w, d))
