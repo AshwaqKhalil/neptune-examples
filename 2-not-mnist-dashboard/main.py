@@ -44,13 +44,15 @@ model = Sequential()
 
 model.add(Conv2D(16, (3, 3), activation='relu',
                  input_shape=(resolution, resolution, 1)))
+# model.add(Conv2D(16, (3, 3), activation='relu'))  # uncomment!
 model.add(MaxPool2D())
 
-model.add(Conv2D(32, (3, 3), activation='relu'))
+# model.add(Conv2D(32, (3, 3), activation='relu'))  # uncomment!
+# model.add(Conv2D(32, (3, 3), activation='relu'))  # uncomment!
 model.add(MaxPool2D())
 
 model.add(Flatten())
-model.add(Dropout(0.5))
+# model.add(Dropout(0.5))  # uncomment!
 model.add(Dense(classes, activation='softmax'))
 
 model.compile(loss='categorical_crossentropy',
