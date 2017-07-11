@@ -14,7 +14,7 @@ channel_balance = neptuner.numeric_channel('content/style balance')
 channel_image = neptuner.image_channel('channel_image')
 
 # Definition of an action.
-content_style_balance = 1.0
+content_style_balance = neptuner.params.content_style_balance
 def _change_content_style_balance_handler(csb):
     global content_style_balance
     content_style_balance = csb
@@ -164,8 +164,7 @@ def transfer_style(stats, img):
 
     content_style_balance_param = tf.placeholder(dtype=tf.float32, shape=[])
 
-    loss_content = 3e-4 * tf.maximum(content_style_balance_param, 1e-3) * neptuner.params.content_intensity\
-                   * tf.reduce_sum((stats['content_stats'] - conv4_2)**2)/2
+    loss_content = 3e-4 * tf.reduce_sum((stats['content_stats'] - conv4_2)**2)/2
 
     loss_style1 = tf.reduce_sum((stats['style_stats1'] - gram_matrix(conv1_1))**2)/2
     loss_style2 = tf.reduce_sum((stats['style_stats2'] - gram_matrix(conv2_1))**2)/2
@@ -173,10 +172,9 @@ def transfer_style(stats, img):
     loss_style4 = tf.reduce_sum((stats['style_stats4'] - gram_matrix(conv4_1))**2)/2
     loss_style5 = tf.reduce_sum((stats['style_stats5'] - gram_matrix(conv5_1))**2)/2
 
-    loss_style = (1.0 / tf.maximum(content_style_balance_param, 1e-3)) * neptuner.params.style_intensity\
-                 * tf.add_n([loss_style1, loss_style2, loss_style3, loss_style4, loss_style5])/5
+    loss_style = tf.add_n([loss_style1, loss_style2, loss_style3, loss_style4, loss_style5])/5
 
-    loss = loss_content + loss_style
+    loss = 2 * (content_style_balance_param * loss_content + loss_style) / (1.0 + content_style_balance_param)
 
     train_op = tf.train.AdamOptimizer(neptuner.params.learning_rate).minimize(loss, var_list=[image])
     vgg16 = tf.train.Saver(tf.global_variables()[1:27])
