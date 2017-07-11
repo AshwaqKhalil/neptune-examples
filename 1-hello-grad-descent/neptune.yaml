@@ -1,4 +1,4 @@
 log_channels:
    - prefix: x
-     name: x (parameter)
+     name: input parameter x
    - prefix: y
