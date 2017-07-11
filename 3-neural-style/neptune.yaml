@@ -39,13 +39,8 @@ parameters:
     type: double
     default: 5.
     required: false
-  - name: style_intensity
-    description: default style intensity
-    type: double
-    default: 1.
-    required: false
-  - name: content_intensity
-    description: default content intensity
+  - name: content_style_balance
+    description: default balance between content and style intensity
     type: double
     default: 1.
     required: false
