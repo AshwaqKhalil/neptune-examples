@@ -7,9 +7,10 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation, Flatten
 from keras.layers import Conv2D, MaxPool2D, Dropout
 from keras.callbacks import Callback, TensorBoard
-from PIL import Image
+# from PIL import Image
 
-from deepsense import neptune
+# from deepsense import neptune
+import neptuner
 
 # wget http://yaroslavvb.com/upload/notMNIST/notMNIST_small.mat
 # load data
@@ -36,46 +37,37 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y,
 
 # Neptune integration
 
-ctx = neptune.Context()
-ctx.integrate_with_tensorflow()
-tbCallBack = TensorBoard(log_dir='./Graph', histogram_freq=0, write_graph=True, write_images=True)
-
-
-
-false_predictions_channel = ctx.job.create_channel(
-    name='false_predictions',
-    channel_type=neptune.ChannelType.IMAGE)
-
-
-# Prepare an image of an incorrectly recognized digit to be sent to Neptune.
-def false_prediction_neptune_image(image_2d_float, index, epoch_number, prediction, actual):
-    false_prediction_image = Image.fromarray((255 * image_2d_float).astype('uint8'))
-    image_name = '(epoch {}) #{}'.format(epoch_number, index)
-    image_description = 'Predicted: {}, actual: {}.'.format(prediction, actual)
-    return neptune.Image(
-        name=image_name,
-        description=image_description,
-        data=false_prediction_image)
+false_predictions_channel = neptuner.image_channel('false_predictions')
+letters = "ABCDEFGHIJ"
 
 class EpochEndCallback(Callback):
-    def __init__(self):
+    def __init__(self, images_per_epoch=-1):
         self.epoch_id = 0
-        self.false_predictions = 0
+        self.images_per_epoch = images_per_epoch
 
     def on_epoch_end(self, epoch, logs={}):
         self.epoch_id += 1
 
         # Predict the digits for images of the test set.
         validation_predictions = model.predict_classes(X_test)
+        scores = model.predict(X_test)
 
         # Identify the incorrectly classified images and send them to Neptune Dashboard.
+        image_per_epoch = 0
         for index, (prediction, actual) in enumerate(zip(validation_predictions, Y_test.argmax(axis=1))):
             if prediction != actual:
-                self.false_predictions += 1
-                false_prediction_image = false_prediction_neptune_image(
-                    X_test[index,:,:,0], index, self.epoch_id, prediction, actual)
-                false_predictions_channel.send(x=self.false_predictions, y=false_prediction_image)
+                if image_per_epoch == self.images_per_epoch:
+                    break
+                image_per_epoch += 1
 
+                false_predictions_channel.send_array(
+                    X_test[index,:,:,0],
+                    name="[{epoch}] pred: {pred} true: {true}".format(epoch=self.epoch_id,
+                                                          pred=letters[prediction],
+                                                          true=letters[actual]),
+                    description="\n".join(["{} {:5.1f}% {}".format(letters[i], 100 * score, "!!!" if i == actual else "")
+                                           for i, score in enumerate(scores[index])])
+                )
 
 
 # create neural network architeture
@@ -105,4 +97,4 @@ model.fit(X_train, Y_train,
           batch_size=32,
           validation_data=(X_test, Y_test),
           verbose=2,
-          callbacks=[tbCallBack, EpochEndCallback()])
+          callbacks=[EpochEndCallback(images_per_epoch=20)])
