@@ -37,16 +37,25 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y,
 
 # Neptune integration
 
+loss_channel, val_loss_channel = neptuner.numeric_channels('Log-loss', ['training', 'validation'])
+acc_channel, val_acc_channel = neptuner.numeric_channels('Accuracy', ['training', 'validation'])
+
 false_predictions_channel = neptuner.image_channel('false_predictions')
 letters = "ABCDEFGHIJ"
 
-class EpochEndCallback(Callback):
+class NeptuneCallback(Callback):
     def __init__(self, images_per_epoch=-1):
         self.epoch_id = 0
         self.images_per_epoch = images_per_epoch
 
     def on_epoch_end(self, epoch, logs={}):
         self.epoch_id += 1
+
+        # logging numeric channels
+        loss_channel.send(self.epoch_id, logs['loss'])
+        val_loss_channel.send(self.epoch_id, logs['val_loss'])
+        acc_channel.send(self.epoch_id, logs['acc'])
+        val_acc_channel.send(self.epoch_id, logs['val_acc'])
 
         # Predict the digits for images of the test set.
         validation_predictions = model.predict_classes(X_test)
@@ -97,4 +106,4 @@ model.fit(X_train, Y_train,
           batch_size=32,
           validation_data=(X_test, Y_test),
           verbose=2,
-          callbacks=[EpochEndCallback(images_per_epoch=20)])
+          callbacks=[NeptuneCallback(images_per_epoch=20)])

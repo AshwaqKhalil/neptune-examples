@@ -11,6 +11,13 @@ def numeric_channel(name, plot=True):
         ctx.job.create_chart(name='{} chart'.format(name), series={name: channel})
     return channel
 
+def numeric_channels(chart_name, names, plot=True):
+    full_names = ["{} {}".format(chart_name, name) for name in names]
+    channels = [ctx.job.create_channel(name=name, channel_type=neptune.ChannelType.NUMERIC) for name in full_names]
+    if plot:
+        ctx.job.create_chart(name='{} chart'.format(chart_name), series=dict(zip(full_names, channels)))
+    return channels
+
 def image_channel(channel_name):
     channel = ctx.job.create_channel(name=channel_name, channel_type=neptune.ChannelType.IMAGE)
     channel.counter = 0
